@@ -1,0 +1,2517 @@
+:root {
+  --bg: #f4f6fb;
+  --panel: #ffffff;
+  --panel2: #f7f8fb;
+  --text: #202124;
+  --muted: #747b86;
+  --stroke: #dfe3eb;
+
+  --cu-blue: #477dff;
+  --cu-blue-soft: #eef3ff;
+  --cu-border: #dfe3eb;
+  --cu-bg: #f4f6fb;
+  --cu-card: #ffffff;
+  --cu-hover: #f1f4fb;
+
+  --type-fundamentals: #45c7e8;
+  --type-core: #6b5cff;
+  --type-selected: #ffb24d;
+  --type-flex: #8be596;
+}
+
+* {
+  box-sizing: border-box
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  background: linear-gradient(180deg, var(--bg), #070a14);
+  color: var(--text);
+}
+
+.topbar {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 16px;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
+  background: rgba(10, 14, 28, .7);
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  backdrop-filter: blur(8px);
+}
+
+.h1 {
+  font-size: 22px;
+  font-weight: 700
+}
+
+.sub {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 4px;
+  max-width: 900px
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.controls input[type="text"],
+.controls input {
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .10);
+  color: var(--text);
+  padding: 8px 10px;
+  border-radius: 10px;
+  outline: none;
+  min-width: 240px;
+}
+
+.controls input::placeholder {
+  color: rgba(233, 238, 255, .55)
+}
+
+button {
+  background: rgba(255, 255, 255, .10);
+  border: 1px solid rgba(255, 255, 255, .12);
+  color: var(--text);
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: rgba(255, 255, 255, .14)
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 520px;
+  gap: 14px;
+  padding: 14px;
+
+  /* важно: layout занимает ровно оставшееся место после шапки */
+  flex: 1 1 0;
+  height: 0;
+  min-height: 0;
+
+  overflow: hidden;
+  align-items: stretch;
+}
+
+.left {
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.treeToolbar {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 6;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.treeToolbarGroup {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.toolBtn {
+  padding: 6px 10px;
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+.zoomLabel {
+  min-width: 68px;
+  text-align: center;
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .08);
+  border: 1px solid rgba(255, 255, 255, .12);
+  color: var(--text);
+  font-weight: 700;
+}
+
+#cy {
+  height: 100%;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, .10);
+  background: radial-gradient(800px 600px at 20% 10%, rgba(69, 117, 255, .10), transparent 60%),
+    radial-gradient(800px 600px at 80% 30%, rgba(255, 168, 86, .08), transparent 65%),
+    rgba(255, 255, 255, .03);
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  padding-right: 4px;
+  scrollbar-gutter: stable;
+  overscroll-behavior: contain;
+}
+
+.right>* {
+  flex: 0 0 auto;
+}
+
+.card {
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid rgba(255, 255, 255, .10);
+  border-radius: 16px;
+  padding: 10px;
+}
+
+.cardTitle {
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: var(--text)
+}
+
+.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace
+}
+
+.legend {
+  display: grid;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--muted)
+}
+
+.sw {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border-radius: 8px;
+  margin-right: 0;
+  border: 2px solid rgba(255, 255, 255, .18);
+  box-sizing: border-box;
+  vertical-align: middle;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .22);
+}
+
+.note {
+  margin-top: 8px;
+  font-size: 13px;
+  color: rgba(233, 238, 255, .72);
+  line-height: 1.4
+}
+
+.details {
+  font-size: 13px;
+  color: rgba(233, 238, 255, .88);
+  line-height: 1.5
+}
+
+.details a {
+  color: #a9c2ff
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, .10);
+  margin: 10px 0
+}
+
+.small {
+  color: var(--muted);
+  font-size: 12px
+}
+
+button,
+.controls input {
+  font-size: 14px;
+}
+
+.counterGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 14px;
+  align-items: start;
+}
+
+.counterType {
+  font-weight: 800;
+  letter-spacing: .2px;
+}
+
+.legendGrid {
+  display: grid;
+  gap: 10px 14px;
+  align-items: center;
+}
+
+.legendGridStatus {
+  grid-template-columns: 1fr 1fr;
+  /* 2 столбца, 2 строки */
+}
+
+/* чтобы hr не был огромным и не раздувал карточку */
+.card hr {
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, .10);
+  margin: 10px 0;
+}
+
+
+.searchWrap {
+  position: relative;
+  display: inline-block;
+}
+
+.searchWrap input {
+  padding-right: 34px;
+  /* место под крестик */
+}
+
+.searchClear {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  border-radius: 8px;
+  padding: 0;
+  line-height: 20px;
+  font-size: 16px;
+  background: rgba(255, 255, 255, .10);
+  border: 1px solid rgba(255, 255, 255, .12);
+}
+
+.searchClear:hover {
+  background: rgba(255, 255, 255, .16);
+}
+
+.legendTypes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 16px;
+}
+
+.legendRow {
+  display: grid;
+  grid-template-columns: 18px auto 1fr;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  color: var(--text);
+  padding: 5px 6px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background .15s ease, transform .15s ease;
+}
+
+.legendRow:hover {
+  background: rgba(255, 255, 255, .055);
+}
+
+.legendRow input {
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  accent-color: #35a7ff;
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 14px;
+}
+
+.infoGrid .note:last-child {
+  grid-column: 1 / -1;
+}
+
+.legendRow .k {
+  color: var(--text);
+  font-weight: 600;
+  letter-spacing: .2px;
+}
+
+.type-fundamentals {
+  color: var(--type-fundamentals) !important;
+}
+
+.type-core {
+  color: var(--type-core) !important;
+}
+
+.type-selected {
+  color: var(--type-selected) !important;
+}
+
+.type-flex {
+  color: var(--type-flex) !important;
+}
+
+.legendLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: max-content;
+}
+
+.helpIcon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid rgba(233, 238, 255, .36);
+  background: rgba(255, 255, 255, .08);
+  color: rgba(233, 238, 255, .92);
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1;
+  cursor: help;
+  flex: 0 0 auto;
+}
+
+.helpIcon::after {
+  content: attr(data-tip);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 10px);
+  transform: translateX(-50%) translateY(4px);
+  width: 240px;
+  padding: 9px 10px;
+  border-radius: 10px;
+  background: rgba(10, 14, 28, .98);
+  border: 1px solid rgba(255, 255, 255, .16);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, .36);
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.35;
+  white-space: normal;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 30;
+  transition: opacity .15s ease, transform .15s ease;
+}
+
+.helpIcon::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 4px);
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: rgba(10, 14, 28, .98);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 31;
+  transition: opacity .15s ease;
+}
+
+.helpIcon:hover::after,
+.helpIcon:focus::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.helpIcon:hover::before,
+.helpIcon:focus::before {
+  opacity: 1;
+}
+
+.legendHint {
+  margin-top: 10px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(53, 208, 255, .18);
+  background: rgba(53, 208, 255, .06);
+  color: rgba(233, 238, 255, .78);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.legendRow .d {
+  color: rgba(233, 238, 255, .72);
+  line-height: 1.15;
+}
+
+/* Цвета статусов */
+.sw-done {
+  background: rgba(255, 255, 255, .03);
+  border: 4px solid rgba(28, 176, 35, 1);
+}
+
+.sw-planned {
+  background: rgba(255, 255, 255, .03);
+  border: 4px solid rgba(198, 0, 235, 1);
+}
+
+.sw-conflict {
+  background: rgba(255, 255, 255, .03);
+  border: 4px solid rgba(255, 56, 56, 1);
+}
+
+.sw-candidateConflict {
+  background: #ffffff;
+  border: 4px dashed rgba(255, 128, 32, 1);
+  box-shadow: none;
+}
+
+.sw-locked {
+  background: rgba(255, 255, 255, .06);
+  border-color: rgba(90, 90, 110, 0.55);
+}
+
+.sw-notOffered {
+  background: rgba(255, 255, 255, .03);
+  border: 3px dotted rgba(170, 70, 70, 0.95);
+}
+
+.swPair {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: max-content;
+}
+
+.swSlash {
+  color: rgba(233, 238, 255, .65);
+  font-weight: 700;
+  line-height: 1;
+  font-size: 16px;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+}
+
+.hidden {
+  display: none;
+}
+
+.modalBackdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 8, 18, .72);
+  backdrop-filter: blur(4px);
+}
+
+.modalContent {
+  position: relative;
+  width: min(1200px, calc(100vw - 40px));
+  height: min(820px, calc(100vh - 40px));
+  margin: 20px auto;
+  background: linear-gradient(180deg, #0f1733, #0a1127);
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 18px;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, .45);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
+}
+
+.scheduleGridWrap {
+  flex: 1;
+  overflow: auto;
+  padding: 0 16px 16px 16px;
+  position: relative;
+}
+
+.scheduleCalendar {
+  min-width: 980px;
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: 14px;
+  overflow: visible;
+  background: rgba(255, 255, 255, .02);
+  position: relative;
+}
+
+.scheduleHeader {
+  display: grid;
+  grid-template-columns: 72px repeat(6, 1fr);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: linear-gradient(180deg, rgba(24, 34, 70, .98), rgba(20, 29, 60, .98));
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, .18);
+}
+
+.scheduleHeaderCell {
+  padding: 12px 8px;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.scheduleCorner {
+  border-right: 1px solid rgba(255, 255, 255, .06);
+}
+
+.scheduleBody {
+  display: grid;
+  grid-template-columns: 72px repeat(6, 1fr);
+}
+
+.scheduleTimeCol {
+  position: relative;
+  border-right: 1px solid rgba(255, 255, 255, .06);
+  background: rgba(255, 255, 255, .02);
+}
+
+.scheduleDayCol {
+  position: relative;
+  border-right: 1px solid rgba(255, 255, 255, .06);
+  background: rgba(255, 255, 255, .01);
+}
+
+.scheduleHourLine {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, .07);
+}
+
+.scheduleHalfLine {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, .035);
+}
+
+.scheduleTimeLabel {
+  position: absolute;
+  left: 8px;
+  font-size: 12px;
+  color: var(--muted);
+  transform: translateY(-50%);
+}
+
+.scheduleItem {
+  position: absolute;
+  border-radius: 10px;
+  padding: 8px 9px;
+  font-size: 12px;
+  line-height: 1.22;
+  border: 1px solid rgba(255, 255, 255, .18);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, .18);
+  overflow: visible;
+  z-index: 2;
+}
+
+
+.scheduleItem--syllabus {
+  cursor: pointer;
+}
+
+
+.scheduleItemInner {
+  height: 100%;
+  overflow: hidden;
+}
+
+.scheduleItemTitle {
+  font-weight: 700;
+}
+
+.scheduleItemMeta {
+  font-size: 11px;
+  margin-top: 4px;
+  opacity: .9;
+}
+
+.scheduleItem:hover,
+.scheduleItem:focus-within {
+  z-index: 5000;
+}
+
+.scheduleBody,
+.scheduleDayCol,
+.scheduleTimeCol {
+  overflow: visible;
+}
+
+.scheduleTooltip {
+  display: none;
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 6px);
+  transform: translateX(-50%);
+  width: 320px;
+  max-width: min(320px, 70vw);
+  padding: 12px;
+  border-radius: 14px;
+  background: #ffffff;
+  color: #202124;
+  border: 1px solid #dfe3eb;
+  box-shadow: 0 18px 45px rgba(20, 28, 45, .22);
+  font-size: 12px;
+  line-height: 1.35;
+  z-index: 5001;
+  pointer-events: auto;
+}
+
+.scheduleItem--tooltipRight .scheduleTooltip {
+  left: 0;
+  right: auto;
+  transform: none;
+}
+
+.scheduleItem--tooltipLeft .scheduleTooltip {
+  right: 0;
+  left: auto;
+  transform: none;
+}
+
+.scheduleTooltip::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -10px;
+  height: 10px;
+}
+
+.scheduleItem--tooltipBelow .scheduleTooltip {
+  top: calc(100% + 6px);
+  bottom: auto;
+}
+
+.scheduleItem--tooltipBelow.scheduleItem--tooltipRight .scheduleTooltip {
+  left: 0;
+  right: auto;
+  transform: none;
+}
+
+.scheduleItem--tooltipBelow.scheduleItem--tooltipLeft .scheduleTooltip {
+  right: 0;
+  left: auto;
+  transform: none;
+}
+
+.scheduleItem--tooltipBelow .scheduleTooltip::after {
+  top: -10px;
+  bottom: auto;
+}
+
+.scheduleItem:hover .scheduleTooltip,
+.scheduleItem:focus-within .scheduleTooltip {
+  display: block;
+}
+
+.scheduleItem:hover .scheduleTooltip {
+  display: block;
+}
+
+.scheduleTooltipTitle {
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+
+.scheduleTooltipMeta {
+  color: #747b86;
+  margin-bottom: 8px;
+}
+
+.scheduleTooltipSection {
+  margin-top: 8px;
+}
+
+.scheduleTooltipSection b {
+  color: #202124;
+}
+
+.scheduleTooltipLink {
+  margin-top: 10px;
+}
+
+.scheduleTooltipLink a {
+  color: #477dff;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.scheduleTooltipLink a:hover {
+  text-decoration: underline;
+}
+
+.scheduleCalendarAll {
+  min-width: 1500px;
+}
+
+.scheduleItem.conflict {
+  border-color: rgba(255, 70, 70, .98);
+  box-shadow: 0 0 0 2px rgba(255, 70, 70, .55), 0 8px 18px rgba(0, 0, 0, .18);
+}
+
+
+
+.scheduleConflicts {
+  padding: 10px 16px 0 16px;
+  font-size: 12px;
+  color: #ffb3b3;
+  min-height: 22px;
+}
+
+.warningText {
+  margin-top: 10px;
+  color: #ff8f8f;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+
+
+.taskModal.hidden {
+  display: none;
+}
+
+.taskModal {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+}
+
+.taskModalBackdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 10, 30, 0.65);
+  backdrop-filter: blur(2px);
+}
+
+.taskModalCard {
+  position: relative;
+  z-index: 1;
+  width: min(760px, calc(100vw - 32px));
+  max-height: calc(100vh - 48px);
+  margin: 24px auto;
+  background: linear-gradient(180deg, rgba(16, 24, 56, 0.98), rgba(9, 16, 40, 0.98));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  color: #eef3ff;
+}
+
+.taskModalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.taskModalHeader h3 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.taskModalCloseBtn {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+  color: #eef3ff;
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.taskModalCloseBtn:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.taskModalBody {
+  padding: 20px;
+  line-height: 1.6;
+  font-size: 20px;
+  overflow-y: auto;
+  max-height: calc(100vh - 140px);
+}
+
+.taskModalBody p {
+  margin: 0 0 16px;
+}
+
+.taskModalBody ul {
+  margin: 0 0 16px 24px;
+  padding: 0;
+}
+
+.taskModalBody li {
+  margin-bottom: 8px;
+}
+
+.counterMeta {
+  display: inline-block;
+  margin-top: 2px;
+}
+
+.cardCollapsible {
+  padding: 0;
+  overflow: visible;
+  flex: 0 0 auto;
+}
+
+.cardToggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 12px 14px;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.cardToggle:hover {
+  background: rgba(255, 255, 255, .04);
+}
+
+.cardToggle .cardTitle {
+  margin: 0;
+}
+
+.cardChevron {
+  font-size: 18px;
+  line-height: 1;
+  color: rgba(233, 238, 255, .72);
+  transition: transform .18s ease;
+}
+
+.cardBody {
+  padding: 0 10px 10px 10px;
+}
+
+.cardCollapsible.is-collapsed .cardBody {
+  display: none;
+}
+
+.cardCollapsible.is-collapsed .cardChevron {
+  transform: rotate(-90deg);
+}
+
+
+.counterFoot {
+  margin: 8px 0 2px;
+  display: grid;
+  gap: 6px;
+}
+
+.counterLoad {
+  margin-top: 2px;
+}
+
+.counterLoadTitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+.counterLoadNote {
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.counterLoadGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 10px;
+}
+
+.counterLoadItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 6px 8px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .035);
+  font-size: 13px;
+}
+
+.counterLoadItem span {
+  color: rgba(233, 238, 255, .78);
+}
+
+.counterLoadItem b {
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.modeToolbar {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 7;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  max-width: 430px;
+  padding: 10px;
+  border-radius: 14px;
+  background: rgba(9, 14, 31, .72);
+  border: 1px solid rgba(255, 255, 255, .10);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, .22);
+  backdrop-filter: blur(8px);
+}
+
+.modeToolbarLabel {
+  color: rgba(233, 238, 255, .74);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .2px;
+}
+
+.modeToolbarButtons {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+.modeBtn {
+  padding: 7px 10px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  background: rgba(255, 255, 255, .08);
+  border: 1px solid rgba(255, 255, 255, .12);
+  color: rgba(233, 238, 255, .86);
+}
+
+.modeBtn:hover {
+  background: rgba(255, 255, 255, .14);
+}
+
+.modeBtn.is-active {
+  color: #fff;
+  border-color: rgba(255, 255, 255, .30);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, .08) inset, 0 8px 22px rgba(0, 0, 0, .22);
+}
+
+.modeBtn[data-mode="info"].is-active {
+  background: linear-gradient(180deg, rgba(80, 120, 255, .34), rgba(55, 80, 190, .28));
+}
+
+.modeBtnDone.is-active {
+  background: linear-gradient(180deg, rgba(37, 163, 36, .42), rgba(22, 120, 34, .34));
+  border-color: rgba(37, 220, 80, .48);
+}
+
+.modeBtnPlanned.is-active {
+  background: linear-gradient(180deg, rgba(196, 0, 235, .42), rgba(125, 50, 220, .34));
+  border-color: rgba(214, 84, 255, .52);
+}
+
+.modeHint {
+  color: rgba(233, 238, 255, .72);
+  font-size: 12px;
+  line-height: 1.25;
+}
+
+@media (max-width: 1100px) {
+  .modeToolbar {
+    max-width: 330px;
+  }
+
+  .modeBtn {
+    font-size: 12px;
+    padding: 6px 8px;
+  }
+}
+
+.tutorialLayer {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  pointer-events: auto;
+}
+
+.tutorialLayer.hidden {
+  display: none;
+}
+
+.tutorialSpotlight {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100px;
+  height: 100px;
+  border-radius: 18px;
+  border: 2px solid rgba(255, 255, 255, .92);
+  box-shadow:
+    0 0 0 9999px rgba(3, 7, 18, .72),
+    0 0 28px rgba(53, 208, 255, .34);
+  pointer-events: none;
+  transition:
+    left .22s ease,
+    top .22s ease,
+    width .22s ease,
+    height .22s ease,
+    border-radius .22s ease;
+}
+
+.tutorialPopup {
+  position: fixed;
+  width: min(410px, calc(100vw - 32px));
+  padding: 16px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(17, 25, 54, .98), rgba(10, 16, 38, .98));
+  border: 1px solid rgba(255, 255, 255, .16);
+  color: var(--text);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .48);
+  z-index: 10002;
+  pointer-events: auto;
+  transition: left .22s ease, top .22s ease;
+}
+
+.tutorialStepCounter {
+  color: rgba(233, 238, 255, .58);
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.tutorialTitle {
+  margin: 0 0 8px;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.tutorialText {
+  color: rgba(233, 238, 255, .82);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.tutorialText p {
+  margin: 0 0 8px;
+}
+
+.tutorialText p:last-child {
+  margin-bottom: 0;
+}
+
+.tutorialActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.tutorialNavActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tutorialSkipBtn {
+  background: transparent;
+  border-color: rgba(255, 255, 255, .14);
+  color: rgba(233, 238, 255, .72);
+}
+
+.tutorialSkipBtn:hover {
+  background: rgba(255, 255, 255, .08);
+  color: var(--text);
+}
+
+.tutorialNextBtn {
+  background: linear-gradient(180deg, rgba(80, 120, 255, .38), rgba(55, 80, 190, .30));
+  border-color: rgba(150, 175, 255, .28);
+}
+
+#tutorialPrevBtn:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+@media (max-width: 900px) {
+  .tutorialPopup {
+    width: min(340px, calc(100vw - 24px));
+    padding: 14px;
+  }
+
+  .tutorialActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .tutorialNavActions {
+    justify-content: flex-end;
+  }
+}
+
+
+/* =========================
+   LMS LIGHT THEME OVERRIDES
+   ========================= */
+
+body {
+  background: var(--cu-bg);
+  color: var(--text);
+}
+
+/* Верхняя панель */
+.topbar {
+  background: #ffffff;
+  border-bottom: 1px solid var(--cu-border);
+  backdrop-filter: none;
+  box-shadow: 0 1px 0 rgba(20, 28, 45, .04);
+  padding: 12px 18px;
+}
+
+.h1 {
+  color: #202124;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.sub {
+  color: #6f7785;
+}
+
+/* Кнопки и поиск */
+button {
+  background: #ffffff;
+  border: 1px solid #d8dde8;
+  color: #3f4652;
+  box-shadow: 0 1px 2px rgba(20, 28, 45, .04);
+}
+
+button:hover {
+  background: #f3f6ff;
+  border-color: #b8c8ff;
+}
+
+.controls input[type="text"],
+.controls input {
+  background: #f7f8fb;
+  border: 1px solid #d8dde8;
+  color: #202124;
+  box-shadow: inset 0 1px 0 rgba(20, 28, 45, .02);
+}
+
+.controls input::placeholder {
+  color: #9aa1ad;
+}
+
+.searchClear {
+  background: #eef1f6;
+  border-color: #d8dde8;
+  color: #6f7785;
+  box-shadow: none;
+}
+
+.searchClear:hover {
+  background: #e8edf7;
+  color: #202124;
+}
+
+/* Главная сетка */
+.layout {
+  background: var(--cu-bg);
+}
+
+/* Холст дерева */
+#cy {
+  border: 1px solid var(--cu-border);
+  background:
+    radial-gradient(900px 600px at 20% 10%, rgba(71, 125, 255, .09), transparent 60%),
+    radial-gradient(900px 600px at 80% 25%, rgba(255, 178, 77, .08), transparent 65%),
+    linear-gradient(180deg, #ffffff, #fbfcff);
+  box-shadow: 0 8px 28px rgba(20, 28, 45, .06);
+}
+
+/* Правая колонка */
+.right {
+  scrollbar-color: #c6ccd8 transparent;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid var(--cu-border);
+  box-shadow: 0 8px 24px rgba(20, 28, 45, .06);
+}
+
+.cardTitle,
+.counterLoadTitle {
+  color: #202124;
+}
+
+.cardToggle {
+  color: #202124;
+}
+
+.cardToggle:hover {
+  background: #f7f8fb;
+}
+
+.cardChevron {
+  color: #7b8494;
+}
+
+.cardBody {
+  color: #202124;
+}
+
+.small,
+.counterLoadNote {
+  color: #747b86;
+}
+
+.note,
+.details,
+.legendRow,
+.legendRow .k,
+.legendRow .d {
+  color: #4d5563;
+}
+
+.details a {
+  color: var(--cu-blue);
+}
+
+hr,
+.card hr {
+  border-top-color: #e5e8ef;
+}
+
+/* Легенда */
+.legendRow {
+  color: #303745;
+}
+
+.legendRow:hover {
+  background: #f4f7ff;
+}
+
+.legendRow input {
+  accent-color: var(--cu-blue);
+}
+
+.legendHint {
+  border-color: #c9d8ff;
+  background: #f1f5ff;
+  color: #566173;
+}
+
+.sw {
+  border-color: rgba(31, 41, 55, .14);
+  box-shadow: 0 4px 12px rgba(20, 28, 45, .10);
+}
+
+.sw-done,
+.sw-planned,
+.sw-conflict,
+.sw-locked,
+.sw-notOffered {
+  background: #ffffff;
+}
+
+.swSlash {
+  color: #747b86;
+}
+
+/* Цветные подписи типов */
+.type-fundamentals {
+  color: #159fc2 !important;
+}
+
+.type-core {
+  color: #6b5cff !important;
+}
+
+.type-selected {
+  color: #d27a00 !important;
+}
+
+.type-flex {
+  color: #2f9f47 !important;
+}
+
+/* Подсказки ? */
+.helpIcon {
+  border-color: #cbd2df;
+  background: #f2f4f8;
+  color: #697386;
+}
+
+.helpIcon::after {
+  background: #ffffff;
+  border: 1px solid #d8dde8;
+  box-shadow: 0 16px 40px rgba(20, 28, 45, .16);
+  color: #303745;
+}
+
+.helpIcon::before {
+  border-top-color: #ffffff;
+}
+
+/* Счётчики */
+.counterLoadItem {
+  background: #f7f8fb;
+}
+
+.counterLoadItem span {
+  color: #697386;
+}
+
+.counterLoadItem b {
+  color: #202124;
+}
+
+.warningText {
+  color: #d93025;
+}
+
+/* Тулбар дерева */
+.treeToolbar .toolBtn,
+.zoomLabel {
+  background: rgba(255, 255, 255, .94);
+  border: 1px solid #d8dde8;
+  color: #3f4652;
+  box-shadow: 0 6px 18px rgba(20, 28, 45, .08);
+}
+
+.treeToolbar .toolBtn:hover {
+  background: #f3f6ff;
+  border-color: #b8c8ff;
+}
+
+.zoomLabel {
+  color: #202124;
+}
+
+/* Режим клика */
+.modeToolbar {
+  background: rgba(255, 255, 255, .96);
+  border: 1px solid #d8dde8;
+  box-shadow: 0 14px 34px rgba(20, 28, 45, .12);
+  backdrop-filter: blur(10px);
+}
+
+.modeToolbarLabel {
+  color: #747b86;
+}
+
+.modeBtn {
+  background: #ffffff;
+  border: 1px solid #d8dde8;
+  color: #3f4652;
+  box-shadow: none;
+}
+
+.modeBtn:hover {
+  background: #f3f6ff;
+  border-color: #b8c8ff;
+}
+
+.modeBtn.is-active {
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(71, 125, 255, .18);
+}
+
+.modeBtn[data-mode="info"].is-active {
+  background: #477dff;
+  border-color: #477dff;
+}
+
+.modeBtnDone.is-active {
+  background: #1aa64a;
+  border-color: #1aa64a;
+}
+
+.modeBtnPlanned.is-active {
+  background: #7a3cff;
+  border-color: #7a3cff;
+}
+
+.modeHint {
+  color: #697386;
+}
+
+/* Модалки: расписание, задание, завершение */
+.modalBackdrop,
+.taskModalBackdrop {
+  background: rgba(18, 24, 38, .38);
+  backdrop-filter: blur(3px);
+}
+
+.scheduleTabs {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px 0 16px;
+}
+
+.scheduleTab {
+  border: 1px solid rgba(71, 125, 255, .25);
+  background: #fff;
+  color: #24324b;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.scheduleTab.is-active {
+  background: #477dff;
+  color: #fff;
+  border-color: #477dff;
+}
+
+.scheduleAllControls {
+  margin: 12px 16px 0 16px;
+  padding: 12px;
+  border: 1px solid rgba(71, 125, 255, .18);
+  border-radius: 14px;
+  background: rgba(71, 125, 255, .06);
+  display: grid;
+  gap: 10px;
+}
+
+.scheduleAllControls.hidden {
+  display: none;
+}
+
+.scheduleFilterRow,
+.scheduleFilterDays,
+.scheduleFilterActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  font-size: 13px;
+}
+
+.scheduleFilterRow label,
+.scheduleFilterDays label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.scheduleFilterDays span {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.scheduleFilterActions button {
+  border: 0;
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+#applyScheduleFilterToTree {
+  background: #477dff;
+  color: #fff;
+}
+
+#resetScheduleFilterFromModal {
+  background: rgba(20, 28, 45, .08);
+  color: #24324b;
+}
+
+.scheduleEmpty {
+  padding: 14px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.modalContent,
+.taskModalCard {
+  background: #ffffff;
+  border: 1px solid #dfe3eb;
+  color: #202124;
+  box-shadow: 0 24px 70px rgba(20, 28, 45, .20);
+}
+
+.modalHeader,
+.taskModalHeader {
+  border-bottom: 1px solid #e5e8ef;
+}
+
+.taskModalHeader h3 {
+  color: #202124;
+}
+
+.taskModalCloseBtn {
+  background: #ffffff;
+  border-color: #d8dde8;
+  color: #3f4652;
+}
+
+.taskModalCloseBtn:hover {
+  background: #f3f6ff;
+}
+
+.taskModalBody {
+  color: #303745;
+  font-size: 18px;
+}
+
+.scheduleConflicts {
+  color: #d93025;
+}
+
+/* Расписание */
+.scheduleCalendar {
+  background: #ffffff;
+  border: 1px solid #dfe3eb;
+}
+
+.scheduleHeader {
+  background: #f7f8fb;
+  border-bottom: 1px solid #dfe3eb;
+  box-shadow: 0 6px 14px rgba(20, 28, 45, .06);
+}
+
+.scheduleHeaderCell {
+  color: #303745;
+}
+
+.scheduleCorner,
+.scheduleTimeCol,
+.scheduleDayCol {
+  border-color: #e5e8ef;
+}
+
+.scheduleTimeCol,
+.scheduleDayCol {
+  background: #ffffff;
+}
+
+.scheduleHourLine {
+  background: #e5e8ef;
+}
+
+.scheduleHalfLine {
+  background: #f0f2f6;
+}
+
+.scheduleTimeLabel {
+  color: #8a93a3;
+}
+
+.scheduleItem {
+  border-color: rgba(31, 41, 55, .12);
+  box-shadow: 0 8px 18px rgba(20, 28, 45, .10);
+}
+
+.scheduleItem.conflict {
+  border-color: #d93025;
+  box-shadow: 0 0 0 2px rgba(217, 48, 37, .30), 0 8px 18px rgba(20, 28, 45, .10);
+}
+
+/* Обучение */
+.tutorialSpotlight {
+  border: 3px solid rgba(71, 125, 255, .95);
+  box-shadow:
+    0 0 0 9999px rgba(18, 24, 38, .44),
+    0 0 28px rgba(71, 125, 255, .36);
+}
+
+.tutorialPopup {
+  background: #ffffff;
+  border: 1px solid #dfe3eb;
+  color: #202124;
+  box-shadow: 0 24px 70px rgba(20, 28, 45, .22);
+}
+
+.tutorialStepCounter {
+  color: #8a93a3;
+}
+
+.tutorialTitle {
+  color: #202124;
+}
+
+.tutorialText {
+  color: #4d5563;
+}
+
+.tutorialSkipBtn {
+  background: #ffffff;
+  border-color: #d8dde8;
+  color: #697386;
+}
+
+.tutorialSkipBtn:hover {
+  background: #f3f6ff;
+  color: #202124;
+}
+
+.tutorialNextBtn {
+  background: #477dff;
+  border-color: #477dff;
+  color: #ffffff;
+}
+
+#tutorialPrevBtn {
+  background: #ffffff;
+  border-color: #d8dde8;
+  color: #3f4652;
+}
+
+#tutorialPrevBtn:disabled {
+  opacity: .45;
+}
+
+/* =========================
+   STATUS COLORS FIX
+   ========================= */
+
+/* Кнопка "Запланировать" должна быть цвета planned-рамки, а не цвета core */
+.modeBtnPlanned.is-active {
+  background: #c40feb;
+  border-color: #c40feb;
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(196, 15, 235, .22);
+}
+
+/* Статусы в легенде: возвращаем специальные рамки */
+.sw-done {
+  background: #ffffff;
+  border: 3px solid rgba(37, 163, 36, 0.95);
+}
+
+.sw-planned {
+  background: #ffffff;
+  border: 3px solid rgba(196, 15, 235, 0.95);
+}
+
+.sw-conflict {
+  background: #ffffff;
+  border: 3px solid rgba(255, 70, 70, 0.98);
+}
+
+.sw-locked {
+  background: #ffffff;
+  border: 3px solid rgba(150, 158, 174, 0.65);
+}
+
+.sw-notOffered {
+  background: #ffffff;
+  border: 3px dotted rgba(170, 70, 70, 0.95);
+}
+
+/* Чтобы пара planned / conflict в легенде выглядела аккуратно */
+.swPair .sw {
+  width: 24px;
+  height: 24px;
+  border-radius: 9px;
+}
+
+.swSlash {
+  color: #7b8494;
+}
+
+.sw-candidateConflict {
+  background: #ffffff;
+  border-style: dashed;
+  border-width: 4px;
+  border-color: rgba(255, 128, 32, 1);
+  box-shadow: none;
+}
+
+/* =========================
+   SCHEDULE CONFLICT FIX
+   ========================= */
+
+.scheduleItem.conflict {
+  border: 3px solid #ef4444 !important;
+  outline: 2px solid rgba(239, 68, 68, .35);
+  outline-offset: 2px;
+  box-shadow:
+    0 0 0 4px rgba(239, 68, 68, .18),
+    0 10px 22px rgba(20, 28, 45, .14) !important;
+  z-index: 20;
+}
+
+
+/* =========================
+   THEME SWITCH + CTA BUTTON
+   ========================= */
+
+#themeToggleBtn {
+  white-space: nowrap;
+}
+
+#completeBtn {
+  background: #477dff;
+  border-color: #477dff;
+  color: #ffffff;
+  font-weight: 800;
+  box-shadow: 0 8px 20px rgba(71, 125, 255, .24);
+}
+
+#completeBtn:hover {
+  background: #2f66f2;
+  border-color: #2f66f2;
+}
+
+/* DARK THEME OVERRIDES */
+body[data-theme="dark"] {
+  --bg: #0b1020;
+  --panel: #111936;
+  --panel2: #0f1733;
+  --text: #e9eeff;
+  --muted: #a9b4da;
+  --stroke: #2a3a78;
+  --cu-bg: #070a14;
+  --cu-card: #111936;
+  --cu-border: rgba(255, 255, 255, .10);
+
+  background: linear-gradient(180deg, #0b1020, #070a14);
+  color: var(--text);
+}
+
+body[data-theme="dark"] .topbar {
+  background: rgba(10, 14, 28, .78);
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
+  box-shadow: none;
+  backdrop-filter: blur(8px);
+}
+
+body[data-theme="dark"] .h1 {
+  color: var(--text);
+}
+
+body[data-theme="dark"] .sub {
+  color: var(--muted);
+}
+
+body[data-theme="dark"] .layout {
+  background: transparent;
+}
+
+body[data-theme="dark"] button {
+  background: rgba(255, 255, 255, .10);
+  border-color: rgba(255, 255, 255, .12);
+  color: var(--text);
+  box-shadow: none;
+}
+
+body[data-theme="dark"] button:hover {
+  background: rgba(255, 255, 255, .14);
+  border-color: rgba(255, 255, 255, .18);
+}
+
+body[data-theme="dark"] #completeBtn {
+  background: linear-gradient(180deg, #4f7cff, #315eea);
+  border-color: rgba(130, 160, 255, .72);
+  color: #ffffff;
+  box-shadow: 0 10px 26px rgba(49, 94, 234, .34);
+}
+
+body[data-theme="dark"] #completeBtn:hover {
+  background: linear-gradient(180deg, #5d88ff, #3768ff);
+}
+
+body[data-theme="dark"] .controls input[type="text"],
+body[data-theme="dark"] .controls input {
+  background: rgba(255, 255, 255, .06);
+  border-color: rgba(255, 255, 255, .10);
+  color: var(--text);
+}
+
+body[data-theme="dark"] .controls input::placeholder {
+  color: rgba(233, 238, 255, .55);
+}
+
+body[data-theme="dark"] .searchClear {
+  background: rgba(255, 255, 255, .10);
+  border-color: rgba(255, 255, 255, .12);
+  color: rgba(233, 238, 255, .78);
+}
+
+body[data-theme="dark"] #cy {
+  border-color: rgba(255, 255, 255, .10);
+  background:
+    radial-gradient(800px 600px at 20% 10%, rgba(69, 117, 255, .10), transparent 60%),
+    radial-gradient(800px 600px at 80% 30%, rgba(255, 168, 86, .08), transparent 65%),
+    rgba(255, 255, 255, .03);
+  box-shadow: none;
+}
+
+body[data-theme="dark"] .card {
+  background: rgba(255, 255, 255, .04);
+  border-color: rgba(255, 255, 255, .10);
+  box-shadow: none;
+}
+
+body[data-theme="dark"] .cardTitle,
+body[data-theme="dark"] .counterLoadTitle,
+body[data-theme="dark"] .cardToggle,
+body[data-theme="dark"] .counterLoadItem b {
+  color: var(--text);
+}
+
+body[data-theme="dark"] .cardToggle:hover {
+  background: rgba(255, 255, 255, .04);
+}
+
+body[data-theme="dark"] .cardChevron {
+  color: rgba(233, 238, 255, .72);
+}
+
+body[data-theme="dark"] .small,
+body[data-theme="dark"] .counterLoadNote {
+  color: var(--muted);
+}
+
+body[data-theme="dark"] .note,
+body[data-theme="dark"] .details,
+body[data-theme="dark"] .legendRow,
+body[data-theme="dark"] .legendRow .k,
+body[data-theme="dark"] .legendRow .d {
+  color: rgba(233, 238, 255, .78);
+}
+
+body[data-theme="dark"] .details a {
+  color: #a9c2ff;
+}
+
+body[data-theme="dark"] hr,
+body[data-theme="dark"] .card hr {
+  border-top-color: rgba(255, 255, 255, .10);
+}
+
+body[data-theme="dark"] .legendRow:hover {
+  background: rgba(255, 255, 255, .055);
+}
+
+body[data-theme="dark"] .legendHint {
+  border-color: rgba(53, 208, 255, .18);
+  background: rgba(53, 208, 255, .06);
+  color: rgba(233, 238, 255, .78);
+}
+
+body[data-theme="dark"] .sw {
+  border-color: rgba(255, 255, 255, .18);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .22);
+}
+
+body[data-theme="dark"] .helpIcon {
+  border-color: rgba(233, 238, 255, .36);
+  background: rgba(255, 255, 255, .08);
+  color: rgba(233, 238, 255, .92);
+}
+
+body[data-theme="dark"] .helpIcon::after {
+  background: rgba(10, 14, 28, .98);
+  border-color: rgba(255, 255, 255, .16);
+  color: var(--text);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, .36);
+}
+
+body[data-theme="dark"] .helpIcon::before {
+  border-top-color: rgba(10, 14, 28, .98);
+}
+
+body[data-theme="dark"] .counterLoadItem {
+  background: rgba(255, 255, 255, .035);
+}
+
+body[data-theme="dark"] .counterLoadItem span {
+  color: rgba(233, 238, 255, .78);
+}
+
+body[data-theme="dark"] .treeToolbar .toolBtn,
+body[data-theme="dark"] .zoomLabel {
+  background: rgba(255, 255, 255, .10);
+  border-color: rgba(255, 255, 255, .12);
+  color: var(--text);
+  box-shadow: none;
+}
+
+body[data-theme="dark"] .modeToolbar {
+  background: rgba(9, 14, 31, .72);
+  border-color: rgba(255, 255, 255, .10);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, .22);
+}
+
+body[data-theme="dark"] .modeToolbarLabel {
+  color: rgba(233, 238, 255, .74);
+}
+
+body[data-theme="dark"] .modeBtn {
+  background: rgba(255, 255, 255, .08);
+  border-color: rgba(255, 255, 255, .12);
+  color: rgba(233, 238, 255, .86);
+}
+
+body[data-theme="dark"] .modeHint {
+  color: rgba(233, 238, 255, .72);
+}
+
+body[data-theme="dark"] .scheduleTooltip {
+  background: #111936;
+  color: #e9eeff;
+  border-color: rgba(255, 255, 255, .14);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, .42);
+}
+
+body[data-theme="dark"] .scheduleTooltipMeta {
+  color: #a9b4da;
+}
+
+body[data-theme="dark"] .scheduleTooltipSection b {
+  color: #e9eeff;
+}
+
+body[data-theme="dark"] .scheduleTooltipLink a {
+  color: #9db7ff;
+}
+
+body[data-theme="dark"] .modalBackdrop,
+body[data-theme="dark"] .taskModalBackdrop {
+  background: rgba(4, 8, 18, .72);
+}
+
+body[data-theme="dark"] .modalContent,
+body[data-theme="dark"] .taskModalCard {
+  background: linear-gradient(180deg, #0f1733, #0a1127);
+  border-color: rgba(255, 255, 255, .12);
+  color: #eef3ff;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, .45);
+}
+
+body[data-theme="dark"] .modalHeader,
+body[data-theme="dark"] .taskModalHeader {
+  border-bottom-color: rgba(255, 255, 255, .08);
+}
+
+body[data-theme="dark"] .taskModalHeader h3 {
+  color: #eef3ff;
+}
+
+body[data-theme="dark"] .taskModalBody {
+  color: #eef3ff;
+}
+
+body[data-theme="dark"] .scheduleCalendar {
+  background: rgba(255, 255, 255, .02);
+  border-color: rgba(255, 255, 255, .08);
+}
+
+body[data-theme="dark"] .scheduleHeader {
+  background: linear-gradient(180deg, rgba(24, 34, 70, .98), rgba(20, 29, 60, .98));
+  border-bottom-color: rgba(255, 255, 255, .08);
+}
+
+body[data-theme="dark"] .scheduleHeaderCell {
+  color: var(--text);
+}
+
+body[data-theme="dark"] .scheduleCorner,
+body[data-theme="dark"] .scheduleTimeCol,
+body[data-theme="dark"] .scheduleDayCol {
+  border-color: rgba(255, 255, 255, .06);
+}
+
+body[data-theme="dark"] .scheduleTimeCol,
+body[data-theme="dark"] .scheduleDayCol {
+  background: rgba(255, 255, 255, .01);
+}
+
+body[data-theme="dark"] .scheduleHourLine {
+  background: rgba(255, 255, 255, .07);
+}
+
+body[data-theme="dark"] .scheduleHalfLine {
+  background: rgba(255, 255, 255, .035);
+}
+
+body[data-theme="dark"] .scheduleTimeLabel {
+  color: var(--muted);
+}
+
+body[data-theme="dark"] .tutorialSpotlight {
+  border: 2px solid rgba(255, 255, 255, .92);
+  box-shadow:
+    0 0 0 9999px rgba(3, 7, 18, .72),
+    0 0 28px rgba(53, 208, 255, .34);
+}
+
+body[data-theme="dark"] .tutorialPopup {
+  background: linear-gradient(180deg, rgba(17, 25, 54, .98), rgba(10, 16, 38, .98));
+  border-color: rgba(255, 255, 255, .16);
+  color: var(--text);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .48);
+}
+
+body[data-theme="dark"] .tutorialTitle {
+  color: var(--text);
+}
+
+body[data-theme="dark"] .tutorialText {
+  color: rgba(233, 238, 255, .82);
+}
+
+body[data-theme="dark"] .tutorialStepCounter {
+  color: rgba(233, 238, 255, .58);
+}
+
+
+body[data-theme="dark"] .scheduleTab {
+  background: rgba(255, 255, 255, .06);
+  color: #e8ecff;
+  border-color: rgba(255, 255, 255, .12);
+}
+
+body[data-theme="dark"] .scheduleTab.is-active {
+  background: #6b5cff;
+  color: #fff;
+  border-color: #6b5cff;
+}
+
+body[data-theme="dark"] .scheduleAllControls {
+  background: rgba(255, 255, 255, .04);
+  border-color: rgba(255, 255, 255, .1);
+}
+
+body[data-theme="dark"] #resetScheduleFilterFromModal {
+  background: rgba(255, 255, 255, .08);
+  color: #e8ecff;
+}
+
+
+/* =========================
+   DARK THEME LEGEND STATUS FIX
+   ========================= */
+
+body[data-theme="dark"] .sw-done {
+  background: rgba(255, 255, 255, .03) !important;
+  border: 4px solid rgba(28, 176, 35, 1) !important;
+}
+
+body[data-theme="dark"] .sw-planned {
+  background: rgba(255, 255, 255, .03) !important;
+  border: 4px solid rgba(198, 0, 235, 1) !important;
+}
+
+body[data-theme="dark"] .sw-conflict {
+  background: rgba(255, 255, 255, .03) !important;
+  border: 4px solid rgba(255, 56, 56, 1) !important;
+}
+
+body[data-theme="dark"] .sw-candidateConflict {
+  background: rgba(255, 255, 255, .03) !important;
+  border: 4px dashed rgba(255, 186, 110, 1) !important;
+  box-shadow: none !important;
+}
+
+body[data-theme="dark"] .sw-candidateConflict {
+  background: rgba(255, 255, 255, .03) !important;
+  border-style: dashed !important;
+  border-width: 4px !important;
+  border-color: rgba(255, 186, 110, 1) !important;
+  box-shadow: none !important;
+}
+
+body[data-theme="dark"] .sw-locked {
+  background: rgba(255, 255, 255, .06) !important;
+  border: 3px solid rgba(90, 90, 110, 0.75) !important;
+}
+
+body[data-theme="dark"] .sw-notOffered {
+  background: rgba(255, 255, 255, .03) !important;
+  border: 3px dotted rgba(170, 70, 70, 0.95) !important;
+}
+
+body[data-theme="dark"] .swPair .sw {
+  width: 24px;
+  height: 24px;
+  border-radius: 9px;
+}
+
+body[data-theme="dark"] .swSlash {
+  color: rgba(233, 238, 255, .65);
+}
+
+
+
+/* =========================
+   COURSE PROFILES
+   ========================= */
+
+.activeProfileBanner {
+  position: absolute;
+  left: 18px;
+  bottom: 18px;
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: min(720px, calc(100% - 36px));
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(71, 125, 255, .12);
+  border: 1px solid rgba(71, 125, 255, .28);
+  color: var(--text);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 12px 28px rgba(20, 28, 45, .12);
+}
+
+#activeScheduleFilterBanner {
+  bottom: 74px;
+  background: rgba(255, 178, 77, .14);
+  border-color: rgba(255, 178, 77, .36);
+}
+
+.activeProfileBanner.hidden {
+  display: none;
+}
+
+.activeProfileBannerText {
+  min-width: 0;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.activeProfileBannerText b {
+  font-weight: 800;
+}
+
+.activeProfileBanner button {
+  flex: 0 0 auto;
+  padding: 7px 10px;
+  font-size: 13px;
+}
+
+.profilesModal.hidden {
+  display: none;
+}
+
+.profilesModal {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+}
+
+.profilesModalBackdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(18, 24, 38, .42);
+  backdrop-filter: blur(3px);
+}
+
+.profilesModalCard {
+  position: absolute;
+  inset: 32px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: var(--panel);
+  border: 1px solid var(--stroke);
+  border-radius: 24px;
+  color: var(--text);
+  box-shadow: 0 24px 70px rgba(20, 28, 45, .24);
+  overflow: hidden;
+}
+
+.profilesModalHeader {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: flex-start;
+  padding: 22px 24px;
+  border-bottom: 1px solid rgba(120, 130, 150, .22);
+}
+
+.profilesModalHeader h3 {
+  margin: 0;
+  font-size: 26px;
+  line-height: 1.15;
+}
+
+.profilesModalHeader p {
+  margin: 8px 0 0;
+  color: var(--muted);
+}
+
+.profilesModalCloseBtn {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border-radius: 12px;
+  font-size: 26px;
+  line-height: 1;
+}
+
+.profilesModalBody {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 18px;
+  overflow: hidden;
+}
+
+.profileGrid {
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(260px, 1fr));
+  gap: 14px;
+  min-height: 0;
+}
+
+.profileCard {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--panel2);
+  border: 1px solid rgba(120, 130, 150, .24);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.profileCardHeader {
+  flex: 0 0 auto;
+  padding: 16px 16px 12px;
+  border-bottom: 1px solid rgba(120, 130, 150, .18);
+}
+
+.profileCardHeader h4 {
+  margin: 0;
+  font-size: 19px;
+  line-height: 1.2;
+}
+
+.profileTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.profileTag {
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(71, 125, 255, .12);
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.profileCardBody {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  padding: 14px 16px;
+}
+
+.profileBlock {
+  margin-bottom: 14px;
+}
+
+.profileBlockTitle {
+  font-weight: 800;
+  margin-bottom: 5px;
+}
+
+.profileBlockText {
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+.profileList {
+  margin: 6px 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+}
+
+.profileList li {
+  margin: 4px 0;
+}
+
+.profileCourseLink {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(71, 125, 255, .55);
+  cursor: pointer;
+}
+
+.profileCourseLink:hover {
+  color: #477dff;
+  border-bottom-color: currentColor;
+}
+
+.profileCourseLink::after {
+  content: " ↗";
+  font-size: 11px;
+  opacity: .65;
+}
+
+.profileCourseName {
+  color: inherit;
+}
+
+.profileSemester {
+  margin-top: 12px;
+  padding: 10px;
+  border-radius: 12px;
+  background: rgba(120, 130, 150, .08);
+}
+
+.profileSemesterTitle {
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.profileChoice {
+  margin-top: 10px;
+}
+
+.profileChoice label {
+  display: block;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.profileChoice select {
+  width: 100%;
+  padding: 9px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(120, 130, 150, .35);
+  background: var(--panel);
+  color: var(--text);
+}
+
+.profileCardFooter {
+  flex: 0 0 auto;
+  padding: 12px 16px 16px;
+  border-top: 1px solid rgba(120, 130, 150, .18);
+}
+
+.profileApplyBtn {
+  width: 100%;
+  font-weight: 800;
+  background: #477dff;
+  border-color: #477dff;
+  color: #ffffff;
+}
+
+.profileApplyBtn:hover {
+  background: #2f66f2;
+  border-color: #2f66f2;
+}
+
+/* dark theme compatibility */
+body[data-theme="dark"] .profilesModalCard {
+  background: linear-gradient(180deg, #0f1733, #0a1127);
+  border-color: rgba(255, 255, 255, .12);
+}
+
+body[data-theme="dark"] .profileCourseLink:hover {
+  color: #9db7ff;
+}
+
+body[data-theme="dark"] .profileCard {
+  background: rgba(255, 255, 255, .04);
+  border-color: rgba(255, 255, 255, .10);
+}
+
+body[data-theme="dark"] .profileSemester {
+  background: rgba(255, 255, 255, .05);
+}
+
+body[data-theme="dark"] .profileChoice select {
+  background: #111936;
+  border-color: rgba(255, 255, 255, .16);
+  color: #e9eeff;
+}
+
+body[data-theme="dark"] .activeProfileBanner {
+  background: rgba(71, 125, 255, .16);
+  border-color: rgba(120, 160, 255, .32);
+}
+
+body[data-theme="dark"] #activeScheduleFilterBanner {
+  background: rgba(255, 178, 77, .16);
+  border-color: rgba(255, 198, 120, .34);
+}
+
+@media (max-width: 1350px) {
+  .profileGrid {
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .profilesModalCard {
+    inset: 12px;
+  }
+
+  .profileGrid {
+    grid-template-columns: 1fr;
+  }
+}
+

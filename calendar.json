@@ -1,0 +1,810 @@
+{
+  "CAL-001": {
+    "calendar_id": "CAL-001",
+    "course": "Метрики бизнеса и продукта. Основной уровень",
+    "is_offered_this_term": true,
+    "slots": [
+      {
+        "kind": "Лекция",
+        "day": "Пятница",
+        "start": "19:00",
+        "end": "20:20"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Пятница",
+        "start": "20:35",
+        "end": "21:55"
+      }
+    ]
+  },
+  "CAL-002": {
+    "calendar_id": "CAL-002",
+    "course": "Метрики бизнеса и продукта. Углублённый уровень",
+    "is_offered_this_term": true,
+    "slots": [
+      {
+        "kind": "Лекция",
+        "day": "Пятница",
+        "start": "19:00",
+        "end": "20:20"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Пятница",
+        "start": "20:35",
+        "end": "21:55"
+      }
+    ]
+  },
+  "CAL-003": {
+    "calendar_id": "CAL-003",
+    "course": "Case Evenings",
+    "is_offered_this_term": true,
+    "slots": [
+      {
+        "kind": "Семинар",
+        "day": "Понедельник",
+        "start": "20:35",
+        "end": "21:55"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Вторник",
+        "start": "20:35",
+        "end": "21:55"
+      }
+    ]
+  },
+  "CAL-004": {
+    "calendar_id": "CAL-004",
+    "course": "Управление разработкой IT продукта",
+    "is_offered_this_term": true,
+    "slots": [
+      {
+        "kind": "Лекция",
+        "day": "Среда",
+        "start": "19:00",
+        "end": "20:20"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Среда",
+        "start": "20:35",
+        "end": "21:55"
+      }
+    ]
+  },
+  "CAL-005": {
+    "calendar_id": "CAL-005",
+    "course": "Управление ML-продуктами",
+    "is_offered_this_term": true,
+    "slots": [
+      {
+        "kind": "Лекция",
+        "day": "Четверг",
+        "start": "19:00",
+        "end": "20:20"
+      }
+    ]
+  },
+  "CAL-006": {
+    "calendar_id": "CAL-006",
+    "course": "Диджитал маркетинг",
+    "is_offered_this_term": true,
+    "slots": [
+      {
+        "kind": "Лекция",
+        "day": "Понедельник",
+        "start": "19:00",
+        "end": "20:20"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Четверг",
+        "start": "20:35",
+        "end": "21:55"
+      }
+    ]
+  },
+  "CAL-007": {
+    "calendar_id": "CAL-007",
+    "course": "Продуктовый дизайн",
+    "is_offered_this_term": true,
+    "slots": [
+      {
+        "kind": "Лекция",
+        "day": "Вторник",
+        "start": "19:00",
+        "end": "20:20"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Среда",
+        "start": "20:35",
+        "end": "21:55"
+      }
+    ]
+  },
+  "CAL-008": {
+    "calendar_id": "CAL-008",
+    "course": "Визуализация",
+    "is_offered_this_term": true,
+    "slots": [
+      {
+        "kind": "Лекция",
+        "day": "Понедельник",
+        "start": "19:00",
+        "end": "20:20"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Вторник",
+        "start": "20:35",
+        "end": "21:55"
+      }
+    ]
+  },
+  "CAL-009": {
+    "calendar_id": "CAL-009",
+    "course": "Data Engineering",
+    "is_offered_this_term": true,
+    "slots": [
+      {
+        "kind": "Лекция",
+        "day": "Суббота",
+        "start": "13:00",
+        "end": "14:20"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Суббота",
+        "start": "14:30",
+        "end": "15:50"
+      }
+    ]
+  },
+  "CAL-010": {
+    "calendar_id": "CAL-010",
+    "course": "Data Engineering",
+    "is_offered_this_term": true,
+    "slots": [
+      {
+        "kind": "Лекция",
+        "day": "Понедельник",
+        "start": "19:00",
+        "end": "20:20"
+      },
+      {
+        "kind": "Лекция",
+        "day": "Понедельник",
+        "start": "20:35",
+        "end": "21:55"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Среда",
+        "start": "20:35",
+        "end": "21:55"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Суббота",
+        "start": "17:30",
+        "end": "18:50"
+      }
+    ]
+  },
+  "CAL-011": {
+    "calendar_id": "CAL-011",
+    "course": "Продвинутые методы A/B-тестирования",
+    "is_offered_this_term": false,
+    "slots": []
+  },
+  "CAL-012": {
+    "calendar_id": "CAL-012",
+    "course": "Основы статистики",
+    "is_offered_this_term": false,
+    "slots": []
+  },
+  "CAL-013": {
+    "calendar_id": "CAL-013",
+    "course": "Machine Learning",
+    "is_offered_this_term": true,
+    "slots": [
+      {
+        "kind": "Лекция",
+        "day": "Среда",
+        "start": "19:00",
+        "end": "20:20"
+      },
+      {
+        "kind": "Лекция",
+        "day": "Среда",
+        "start": "20:35",
+        "end": "21:55"
+      },
+      {
+        "kind": "Лекция",
+        "day": "Четверг",
+        "start": "19:00",
+        "end": "20:20"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Суббота",
+        "start": "11:30",
+        "end": "12:50"
+      }
+    ]
+  },
+  "CAL-014": {
+    "calendar_id": "CAL-014",
+    "course": "Machine Learning для Product Managers",
+    "is_offered_this_term": true,
+    "slots": [
+      {
+        "kind": "Лекция",
+        "day": "Четверг",
+        "start": "19:00",
+        "end": "20:20"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Четверг",
+        "start": "20:35",
+        "end": "21:55"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Суббота",
+        "start": "16:00",
+        "end": "17:20"
+      }
+    ]
+  },
+  "CAL-015": {
+    "calendar_id": "CAL-015",
+    "course": "SQL и базы данных",
+    "is_offered_this_term": true,
+    "slots": [
+      {
+        "kind": "Лекция",
+        "day": "Четверг",
+        "start": "19:00",
+        "end": "20:20"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Четверг",
+        "start": "20:35",
+        "end": "21:55"
+      }
+    ]
+  },
+  "CAL-016": {
+    "calendar_id": "CAL-016",
+    "course": "Продуктовая студия",
+    "is_offered_this_term": true,
+    "slots": [
+      {
+        "kind": "Лекция",
+        "day": "Понедельник",
+        "start": "20:35",
+        "end": "21:55"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Понедельник",
+        "start": "19:00",
+        "end": "20:20"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Пятница",
+        "start": "20:35",
+        "end": "21:55"
+      }
+    ]
+  },
+  "CAL-017": {
+    "calendar_id": "CAL-017",
+    "course": "Soft Skills Lab",
+    "is_offered_this_term": true,
+    "slots": [
+      {
+        "kind": "Семинар",
+        "day": "Суббота",
+        "start": "10:00",
+        "end": "11:20"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Суббота",
+        "start": "11:30",
+        "end": "12:50"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Суббота",
+        "start": "13:00",
+        "end": "14:20"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Суббота",
+        "start": "14:30",
+        "end": "15:50"
+      }
+    ]
+  },
+  "CAL-018": {
+    "calendar_id": "CAL-018",
+    "course": "Онлайн-эксперименты для оптимизации продукта",
+    "is_offered_this_term": true,
+    "slots": [
+      {
+        "kind": "Лекция",
+        "day": "Суббота",
+        "start": "17:30",
+        "end": "18:50"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Пятница",
+        "start": "19:00",
+        "end": "20:20"
+      }
+    ]
+  },
+  "CAL-019": {
+    "calendar_id": "CAL-019",
+    "course": "Онлайн-эксперименты для оптимизации продукта",
+    "is_offered_this_term": true,
+    "slots": [
+      {
+        "kind": "Лекция",
+        "day": "Четверг",
+        "start": "19:00",
+        "end": "20:20"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Четверг",
+        "start": "20:35",
+        "end": "21:55"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Суббота",
+        "start": "11:30",
+        "end": "12:50"
+      }
+    ]
+  },
+  "CAL-020": {
+    "calendar_id": "CAL-020",
+    "course": "Causal analysis (Причинно-следственный анализ)",
+    "is_offered_this_term": true,
+    "slots": [
+      {
+        "kind": "Лекция",
+        "day": "Вторник",
+        "start": "19:00",
+        "end": "20:20"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Суббота",
+        "start": "16:00",
+        "end": "17:20"
+      }
+    ]
+  },
+  "CAL-021": {
+    "calendar_id": "CAL-021",
+    "course": "Принятие решений на основе данных",
+    "is_offered_this_term": true,
+    "slots": [
+      {
+        "kind": "Семинар",
+        "day": "Среда",
+        "start": "19:00",
+        "end": "20:20"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Среда",
+        "start": "20:35",
+        "end": "21:55"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Суббота",
+        "start": "10:00",
+        "end": "11:20"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Суббота",
+        "start": "11:30",
+        "end": "12:50"
+      }
+    ]
+  },
+  "CAL-022": {
+    "calendar_id": "CAL-022",
+    "course": "Системный анализ",
+    "is_offered_this_term": false,
+    "slots": []
+  },
+  "CAL-023": {
+    "calendar_id": "CAL-023",
+    "course": "Стратегический и финансовый менеджмент",
+    "is_offered_this_term": false,
+    "slots": []
+  },
+  "CAL-024": {
+    "calendar_id": "CAL-024",
+    "course": "Оценка инвестиционной привлекательности проектов",
+    "is_offered_this_term": true,
+    "slots": [
+      {
+        "kind": "Лекция",
+        "day": "Суббота",
+        "start": "11:30",
+        "end": "12:50"
+      }
+    ]
+  },
+  "CAL-025": {
+    "calendar_id": "CAL-025",
+    "course": "Генерация и валидация гипотез. Основной уровень",
+    "is_offered_this_term": true,
+    "slots": [
+      {
+        "kind": "Лекция",
+        "day": "Понедельник",
+        "start": "19:00",
+        "end": "20:20"
+      },
+      {
+        "kind": "Лекция",
+        "day": "Понедельник",
+        "start": "20:35",
+        "end": "21:55"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Вторник",
+        "start": "19:00",
+        "end": "20:20"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Вторник",
+        "start": "20:35",
+        "end": "21:55"
+      }
+    ]
+  },
+  "CAL-026": {
+    "calendar_id": "CAL-026",
+    "course": "Генерация и валидация гипотез. Углублённый уровень",
+    "is_offered_this_term": true,
+    "slots": [
+      {
+        "kind": "Лекция",
+        "day": "Понедельник",
+        "start": "19:00",
+        "end": "20:20"
+      },
+      {
+        "kind": "Лекция",
+        "day": "Понедельник",
+        "start": "20:35",
+        "end": "21:55"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Вторник",
+        "start": "19:00",
+        "end": "20:20"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Вторник",
+        "start": "20:35",
+        "end": "21:55"
+      }
+    ]
+  },
+  "CAL-027": {
+    "calendar_id": "CAL-027",
+    "course": "Рост бизнеса как инструмент управления (GROWTH)",
+    "is_offered_this_term": true,
+    "slots": [
+      {
+        "kind": "Лекция",
+        "day": "Четверг",
+        "start": "19:00",
+        "end": "20:20"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Пятница",
+        "start": "19:00",
+        "end": "20:20"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Пятница",
+        "start": "20:35",
+        "end": "21:55"
+      }
+    ]
+  },
+  "CAL-028": {
+    "calendar_id": "CAL-028",
+    "course": "Алгоритмы и структуры данных",
+    "is_offered_this_term": true,
+    "slots": [
+      {
+        "kind": "Лекция",
+        "day": "Суббота",
+        "start": "10:00",
+        "end": "11:20"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Суббота",
+        "start": "11:30",
+        "end": "12:50"
+      }
+    ]
+  },
+  "CAL-029": {
+    "calendar_id": "CAL-029",
+    "course": "Java Core",
+    "is_offered_this_term": false,
+    "slots": []
+  },
+  "CAL-030": {
+    "calendar_id": "CAL-030",
+    "course": "Алгоритмы и структуры данных. Часть 1",
+    "is_offered_this_term": false,
+    "slots": []
+  },
+  "CAL-031": {
+    "calendar_id": "CAL-031",
+    "course": "Алгоритмы и структуры данных. Часть 2",
+    "is_offered_this_term": true,
+    "slots": [
+      {
+        "kind": "Лекция",
+        "day": "Вторник",
+        "start": "19:00",
+        "end": "20:20"
+      },
+      {
+        "kind": "Лекция",
+        "day": "Четверг",
+        "start": "20:35",
+        "end": "21:55"
+      },
+      {
+        "kind": "Лекция",
+        "day": "Пятница",
+        "start": "19:00",
+        "end": "20:20"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Вторник",
+        "start": "20:35",
+        "end": "21:55"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Пятница",
+        "start": "19:00",
+        "end": "20:20"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Пятница",
+        "start": "20:35",
+        "end": "21:55"
+      }
+    ]
+  },
+  "CAL-032": {
+    "calendar_id": "CAL-032",
+    "course": "Java Spring (Разработка веб-приложений на Java с использованием Spring)",
+    "is_offered_this_term": true,
+    "slots": [
+      {
+        "kind": "Лекция",
+        "day": "Среда",
+        "start": "19:00",
+        "end": "20:20"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Среда",
+        "start": "20:35",
+        "end": "21:55"
+      }
+    ]
+  },
+  "CAL-033": {
+    "calendar_id": "CAL-033",
+    "course": "Промышленная разработка",
+    "is_offered_this_term": true,
+    "slots": [
+      {
+        "kind": "Лекция",
+        "day": "Суббота",
+        "start": "13:00",
+        "end": "14:20"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Суббота",
+        "start": "14:30",
+        "end": "15:50"
+      }
+    ]
+  },
+  "CAL-034": {
+    "calendar_id": "CAL-034",
+    "course": "Сетевые технологии",
+    "is_offered_this_term": false,
+    "slots": []
+  },
+  "CAL-035": {
+    "calendar_id": "CAL-035",
+    "course": "Информационная безопасность",
+    "is_offered_this_term": false,
+    "slots": []
+  },
+  "CAL-036": {
+    "calendar_id": "CAL-036",
+    "course": "Многопоточное программирование",
+    "is_offered_this_term": false,
+    "slots": []
+  },
+  "CAL-037": {
+    "calendar_id": "CAL-037",
+    "course": "Системы управления базами данных",
+    "is_offered_this_term": false,
+    "slots": []
+  },
+  "CAL-038": {
+    "calendar_id": "CAL-038",
+    "course": "Разработка на языке программирования Kotlin",
+    "is_offered_this_term": true,
+    "slots": [
+      {
+        "kind": "Лекция",
+        "day": "Пятница",
+        "start": "19:00",
+        "end": "20:20"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Пятница",
+        "start": "20:35",
+        "end": "21:55"
+      }
+    ]
+  },
+  "CAL-039": {
+    "calendar_id": "CAL-039",
+    "course": "Разработка на языке программирования Go",
+    "is_offered_this_term": true,
+    "slots": [
+      {
+        "kind": "Лекция",
+        "day": "Среда",
+        "start": "19:00",
+        "end": "20:20"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Среда",
+        "start": "20:35",
+        "end": "21:55"
+      }
+    ]
+  },
+  "CAL-040": {
+    "calendar_id": "CAL-040",
+    "course": "Тестирование",
+    "is_offered_this_term": true,
+    "slots": [
+      {
+        "kind": "Лекция",
+        "day": "Вторник",
+        "start": "19:00",
+        "end": "20:20"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Вторник",
+        "start": "20:35",
+        "end": "21:55"
+      }
+    ]
+  },
+  "CAL-041": {
+    "calendar_id": "CAL-041",
+    "course": "Архитектура программных систем",
+    "is_offered_this_term": true,
+    "slots": [
+      {
+        "kind": "Лекция",
+        "day": "Четверг",
+        "start": "19:00",
+        "end": "20:20"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Четверг",
+        "start": "20:35",
+        "end": "21:55"
+      }
+    ]
+  },
+  "CAL-042": {
+    "calendar_id": "CAL-042",
+    "course": "Распределённые системы",
+    "is_offered_this_term": true,
+    "slots": [
+      {
+        "kind": "Лекция",
+        "day": "Понедельник",
+        "start": "19:00",
+        "end": "20:20"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Понедельник",
+        "start": "20:35",
+        "end": "21:55"
+      }
+    ]
+  },
+  "CAL-053": {
+    "calendar_id": "CAL-053",
+    "course": "ML System Design",
+    "is_offered_this_term": true,
+    "slots": [
+      {
+        "kind": "Лекция",
+        "day": "Суббота",
+        "start": "16:00",
+        "end": "17:20"
+      }
+    ]
+  },
+  "CAL-045": {
+    "calendar_id": "CAL-045",
+    "course": "Алгоритмы",
+    "is_offered_this_term": true,
+    "slots": [
+      {
+        "kind": "Лекция",
+        "day": "Пятница",
+        "start": "19:00",
+        "end": "20:20"
+      },
+      {
+        "kind": "Семинар",
+        "day": "Пятница",
+        "start": "20:35",
+        "end": "21:55"
+      }
+    ]
+  }
+}
