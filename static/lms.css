@@ -1,0 +1,522 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --page: #f7f8fa;
+  --surface: #ffffff;
+  --line: #d9dce2;
+  --text: #1f2026;
+  --muted: #5f636d;
+  --blue: #3e78ff;
+  --blue-card: #15a5df;
+  --green-card: #05aa55;
+  --orange-card: #ff612f;
+  --purple-card: #b875ee;
+  --gray-card: #e4e4e4;
+  --side-width: 96px;
+  --top-height: 82px;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--page);
+  color: var(--text);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  height: var(--top-height);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 0 28px 0 20px;
+  background: #f8f9fb;
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  width: 230px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #202124;
+  flex: 0 0 auto;
+}
+
+.brand-mark {
+  width: 40px;
+  height: 40px;
+  color: #202124;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  letter-spacing: .075em;
+  line-height: .92;
+  font-size: 18px;
+  font-weight: 850;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  flex: 1 1 auto;
+  height: 100%;
+}
+
+.main-nav a {
+  display: inline-flex;
+  align-items: center;
+  height: 48px;
+  padding: 0 15px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #3f424a;
+  font-size: 18px;
+  white-space: nowrap;
+}
+
+.main-nav a.active {
+  background: #eef2f8;
+  color: #3b73ff;
+}
+
+
+/* Course tree integration button */
+.main-nav a.course-choice {
+  background: #eef3ff;
+  color: #3b73ff;
+  font-weight: 650;
+}
+
+.main-nav a.course-choice:hover {
+  background: #e4ecff;
+}
+
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex: 0 0 auto;
+}
+
+.late-days,
+.bell,
+.side-icon,
+.collapse,
+.search {
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: default;
+}
+
+.late-days {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 17px;
+  border-radius: 10px;
+  background: #eef1f6;
+  font-size: 16px;
+  color: #1f2026;
+}
+
+.late-days svg {
+  width: 21px;
+  height: 21px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.bell {
+  position: relative;
+  width: 34px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  color: #9da1aa;
+}
+
+.bell svg {
+  width: 28px;
+  height: 28px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.85;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.bell .dot {
+  position: absolute;
+  right: 1px;
+  top: 0;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #4b7cff;
+  border: 3px solid #f8f9fb;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #eef1f6;
+  color: #2b2d33;
+  font-size: 20px;
+  letter-spacing: .01em;
+}
+
+.layout {
+  display: flex;
+  padding-top: var(--top-height);
+}
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: var(--top-height);
+  bottom: 0;
+  width: var(--side-width);
+  border-right: 1px solid var(--line);
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.collapse {
+  width: 52px;
+  height: 62px;
+  margin-top: 22px;
+  display: grid;
+  place-items: center;
+  color: #4a4f58;
+}
+
+.collapse svg,
+.side-icon svg,
+.search svg {
+  width: 28px;
+  height: 28px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.side-icons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 17px;
+  margin-top: 11px;
+}
+
+.side-icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  color: #5e636c;
+}
+
+.side-icon.active {
+  color: #4777ff;
+  background: #f0f4ff;
+}
+
+.side-icon svg {
+  width: 31px;
+  height: 31px;
+}
+
+.content {
+  width: 100%;
+  margin-left: var(--side-width);
+  padding: 34px 0 92px 174px;
+}
+
+.breadcrumbs {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #5d626b;
+  font-size: 18px;
+}
+
+.breadcrumbs a {
+  color: #4378ff;
+  text-decoration: none;
+}
+
+.breadcrumbs svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.page-head {
+  width: 1260px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 19px;
+  margin-bottom: 36px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 42px;
+  line-height: 1.08;
+  letter-spacing: -.03em;
+  font-weight: 830;
+}
+
+.search {
+  width: 52px;
+  height: 52px;
+  margin-right: 1px;
+  display: grid;
+  place-items: center;
+  color: #4c5159;
+}
+
+.search svg {
+  width: 33px;
+  height: 33px;
+}
+
+.course-grid {
+  width: 1260px;
+  display: grid;
+  grid-template-columns: repeat(4, 292px);
+  column-gap: 30px;
+  row-gap: 30px;
+}
+
+.course-card {
+  min-width: 0;
+}
+
+.cover {
+  position: relative;
+  width: 292px;
+  height: 192px;
+  overflow: hidden;
+  border-radius: 15px;
+  display: block;
+}
+
+.cover.green { background: var(--green-card); }
+.cover.blue { background: var(--blue-card); }
+.cover.orange { background: var(--orange-card); }
+.cover.purple { background: var(--purple-card); }
+.cover.gray { background: var(--gray-card); }
+
+.cover.dots::before {
+  content: "";
+  position: absolute;
+  inset: 22px 22px 21px 22px;
+  background-image: radial-gradient(circle, rgba(255,255,255,.9) 1.15px, transparent 1.25px);
+  background-size: 13px 13px;
+  opacity: .95;
+}
+
+.art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.55;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.art text {
+  fill: currentColor;
+  stroke: none;
+  font-size: 8px;
+  font-weight: 700;
+  opacity: .9;
+}
+
+.art circle {
+  fill: none;
+}
+
+.art circle[r="2.2"],
+.art circle[r="2.4"],
+.art circle[r="2.6"],
+.art circle[r="3.5"] {
+  fill: currentColor;
+  stroke: none;
+}
+
+.art .main-line {
+  stroke-width: 1.65;
+}
+
+.art .thin {
+  stroke-width: 1.3;
+}
+
+.art .dash {
+  stroke-dasharray: 3.3 4.5;
+}
+
+.geometry {
+  transform: translate(0, 0);
+  opacity: .96;
+}
+
+.wave,
+.viz,
+.coils {
+  opacity: .98;
+}
+
+.cover.gray .art {
+  color: #22252a;
+  stroke-width: 1.5;
+}
+
+.cover.gray .art circle[r="2.2"],
+.cover.gray .art circle[r="2.4"],
+.cover.gray .art circle[r="2.6"],
+.cover.gray .art circle[r="3.5"] {
+  fill: currentColor;
+}
+
+.crop-low {
+  margin-top: 2px;
+}
+
+.course-card h2 {
+  margin: 12px 0 0;
+  color: #202125;
+  font-size: 18px;
+  line-height: 1.28;
+  letter-spacing: -.01em;
+  font-weight: 500;
+  max-width: 292px;
+}
+
+@media (max-width: 1400px) {
+  .content {
+    padding-left: 74px;
+  }
+
+  .page-head,
+  .course-grid {
+    width: calc(100vw - var(--side-width) - 120px);
+  }
+
+  .course-grid {
+    grid-template-columns: repeat(auto-fit, minmax(270px, 292px));
+  }
+}
+
+@media (max-width: 900px) {
+  :root {
+    --side-width: 72px;
+  }
+
+  .brand {
+    width: auto;
+  }
+
+  .brand-text {
+    display: none;
+  }
+
+  .main-nav {
+    gap: 2px;
+    overflow-x: auto;
+  }
+
+  .main-nav a {
+    font-size: 15px;
+    padding: 0 10px;
+  }
+
+  .late-days span {
+    display: none;
+  }
+
+  .content {
+    padding: 26px 18px 70px 24px;
+  }
+
+  .page-head,
+  .course-grid {
+    width: 100%;
+  }
+
+  .course-grid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+  }
+
+  .cover,
+  .course-card h2 {
+    width: 100%;
+  }
+}
+
+
+
+/* =========================
+   PRESENTATION SCALE
+   ========================= */
+
+/* Имитирует браузерный масштаб 80%, но прямо внутри страницы */
+html {
+  zoom: 0.83;
+}
+
+/* Фолбэк для браузеров без zoom */
+@supports not (zoom: 1) {
+  body {
+    transform: scale(0.8);
+    transform-origin: top left;
+    width: 125%;
+    min-height: 125vh;
+  }
+}

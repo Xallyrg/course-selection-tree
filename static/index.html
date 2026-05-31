@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Дерево курсов — прототип</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+  <script src="https://unpkg.com/cytoscape@3.30.2/dist/cytoscape.min.js"></script>
+  <script src="https://unpkg.com/dagre@0.8.5/dist/dagre.min.js"></script>
+  <script src="https://unpkg.com/cytoscape-dagre@2.5.0/cytoscape-dagre.js"></script>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="title">
+      <div class="h1">Дерево курсов</div>
+      <div class="sub">Ниже вы видите все курсы, которые вы можете изучить в магистратуре.</div>
+    </div>
+
+    <div class="controls">
+      <div class="searchWrap">
+        <input id="search" placeholder="Поиск курса..." />
+        <button id="searchClear" class="searchClear" title="Очистить">×</button>
+      </div>
+      <button id="themeToggleBtn" type="button">Тёмная тема</button>
+      <button id="tutorialBtn" type="button">Обучение</button>
+      <button id="profilesBtn" type="button">Профили</button>
+      <!-- <button id="taskBtn" class="btn">Задание</button> -->
+      <!-- <button id="completeBtn" class="btn">Завершить</button> -->
+      <button id="openSchedule">Посмотреть расписание</button>
+      <button id="reset">Сброс</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="left">
+      <div class="modeToolbar">
+        <div class="modeToolbarLabel">Режим клика</div>
+
+        <div class="modeToolbarButtons">
+          <button id="modeInfoBtn" class="modeBtn is-active" type="button" data-mode="info">
+            Информация
+          </button>
+
+          <button id="modeDoneBtn" class="modeBtn modeBtnDone" type="button" data-mode="done">
+            ✓ Пройдено
+          </button>
+
+          <button id="modePlannedBtn" class="modeBtn modeBtnPlanned" type="button" data-mode="planned">
+            ◇ Запланировать
+          </button>
+        </div>
+
+        <div id="modeHint" class="modeHint">
+          Клик по курсу откроет информацию
+        </div>
+      </div>
+
+      <div class="treeToolbar">
+        <div class="treeToolbarGroup">
+          <button id="zoomOutBtn" class="toolBtn" title="Отдалить">−</button>
+          <div id="zoomLabel" class="zoomLabel">100%</div>
+          <button id="zoomInBtn" class="toolBtn" title="Приблизить">+</button>
+        </div>
+
+        <div class="treeToolbarGroup">
+          <button id="toggleDragBtn" class="toolBtn">Зафиксировать узлы</button>
+          <button id="resetViewBtn" class="toolBtn">Сбросить вид</button>
+        </div>
+      </div>
+
+      <div id="activeProfileBanner" class="activeProfileBanner hidden"></div>
+      <div id="activeScheduleFilterBanner" class="activeProfileBanner hidden"></div>
+      <div id="cy"></div>
+    </section>
+
+    <aside class="right">
+      <div class="card cardCollapsible" id="legendCard">
+        <button class="cardToggle" type="button" data-target="legendBody" aria-expanded="true">
+          <span class="cardTitle">Легенда</span>
+          <span class="cardChevron">▾</span>
+        </button>
+
+        <div class="cardBody" id="legendBody">
+          <div class="legendTypes">
+            <label class="legendRow">
+              <input id="fFund" type="checkbox" checked />
+              <span class="sw" style="background:#45c7e8"></span>
+              <span class="k legendLabel type-fundamentals">
+                fundamentals
+                <span class="helpIcon" tabindex="0" title="Базовые курсы, начать стоит с них, пройти надо все"
+                  data-tip="Базовые курсы, начать стоит с них, пройти надо все">?</span>
+              </span>
+            </label>
+
+            <label class="legendRow">
+              <input id="fCore" type="checkbox" checked />
+              <span class="sw" style="background:#6b5cff"></span>
+              <span class="k legendLabel type-core">
+                core
+                <span class="helpIcon" tabindex="0" title="Курсы по твоему направлению, пройти надо все"
+                  data-tip="Курсы по твоему направлению, пройти надо все">?</span>
+              </span>
+            </label>
+
+            <label class="legendRow">
+              <input id="fSelected" type="checkbox" checked />
+              <span class="sw" style="background:#ffb24d"></span>
+              <span class="k legendLabel type-selected">
+                selected
+                <span class="helpIcon" tabindex="0"
+                  title="Углубленные курсы по твоему направлению. Надо набрать 10 зачетных единиц"
+                  data-tip="Углубленные курсы по твоему направлению. Надо набрать 10 зачетных единиц">?</span>
+              </span>
+            </label>
+
+            <label class="legendRow">
+              <input id="fFlex" type="checkbox" checked />
+              <span class="sw" style="background:#8be596"></span>
+              <span class="k legendLabel type-flex">
+                flex
+                <span class="helpIcon" tabindex="0" title="Курсы смежных направлений. Надо набрать 5 зачетных единиц"
+                  data-tip="Курсы смежных направлений. Надо набрать 5 зачетных единиц">?</span>
+              </span>
+            </label>
+          </div>
+
+          <div class="legendHint">
+            Галочки в легенде — это фильтры: можно временно скрывать и показывать типы и статусы курсов.
+          </div>
+
+          <hr />
+
+          <div class="legendGrid legendGridStatus">
+            <label class="legendRow">
+              <input id="fDone" type="checkbox" checked />
+              <span class="sw sw-done"></span>
+              <span>пройдено</span>
+            </label>
+
+            <label class="legendRow">
+              <input id="fPlanned" type="checkbox" checked />
+              <span class="swPair">
+                <span class="sw sw-planned" title="запланировано"></span>
+                <span class="swSlash">/</span>
+                <span class="sw sw-conflict" title="конфликт по времени"></span>
+              </span>
+              <span>запланировано</span>
+            </label>
+
+            <label class="legendRow">
+              <input id="fLocked" type="checkbox" />
+              <span class="sw sw-locked"></span>
+              <span>пока недоступны</span>
+            </label>
+
+            <label class="legendRow">
+              <input id="fNotOffered" type="checkbox" />
+              <span class="sw sw-notOffered"></span>
+              <span>не читается</span>
+            </label>
+
+            <label class="legendRow">
+              <input id="fConflictWithPlanned" type="checkbox" checked />
+              <span class="sw sw-candidateConflict"></span>
+              <span>пересекается по расписанию с выбранными</span>
+            </label>
+          </div>
+
+          <div class="note">
+            <b>Зелёная рамка</b> — курс пройден.<br />
+            <b>Фиолетовая рамка</b> — курс запланирован.<br />
+            <b>Красная рамка</b> — у запланированного курса есть пересечение по времени.<br />
+            <b>Оранжевая пунктирная рамка</b> — доступный курс пересекается с уже выбранными курсами.<br />
+            <!-- <b>Красная пунктирная рамка</b> — курс не читается в этом семестре. -->          </div>
+        </div>
+      </div>
+
+      <div class="card cardCollapsible" id="countersCard">
+        <button class="cardToggle" type="button" data-target="countersBody" aria-expanded="true">
+          <span class="cardTitle">Счётчики</span>
+          <span class="cardChevron">▾</span>
+        </button>
+
+        <div class="cardBody" id="countersBody">
+          <div id="counters" class="mono"></div>
+        </div>
+      </div>
+
+      <div class="card cardCollapsible is-collapsed" id="detailsCard">
+        <button class="cardToggle" type="button" data-target="detailsBody" aria-expanded="false">
+          <span class="cardTitle">Карточка курса</span>
+          <span class="cardChevron">▾</span>
+        </button>
+
+        <div class="cardBody" id="detailsBody">
+          <div id="details" class="details">Выбери курс, чтобы увидеть пререквизиты, расписание и нагрузку.</div>
+        </div>
+      </div>
+    </aside>
+  </main>
+  <div id="scheduleModal" class="modal hidden">
+    <div class="modalBackdrop" id="scheduleBackdrop"></div>
+
+    <div class="modalContent">
+      <div class="modalHeader">
+        <div>
+          <div class="cardTitle">Моё расписание</div>
+          <div class="small">Показываются только запланированные курсы текущего семестра</div>
+        </div>
+        <button id="closeSchedule">Закрыть</button>
+      </div>
+
+      <div class="scheduleTabs">
+        <button id="scheduleTabPlanned" class="scheduleTab is-active" type="button">Запланированные курсы</button>
+        <button id="scheduleTabAll" class="scheduleTab" type="button">Все читаемые курсы</button>
+      </div>
+
+      <div id="scheduleAllControls" class="scheduleAllControls hidden">
+        <div class="scheduleFilterRow">
+          <label>
+            <input id="sfEligible" type="checkbox" checked />
+            Только доступные по пререквизитам
+          </label>
+
+          <label>
+            <input id="sfHideDone" type="checkbox" checked />
+            Не показывать пройденные
+          </label>
+
+          <label>
+            <input id="sfNoPlannedConflicts" type="checkbox" />
+            Без пересечений с запланированными
+          </label>
+
+          <label>
+            <input id="sfActiveProfile" type="checkbox" />
+            Только активный профиль
+          </label>
+        </div>
+
+        <div class="scheduleFilterDays">
+          <span>Дни недели:</span>
+
+          <label><input type="checkbox" data-schedule-day="Понедельник" checked /> Пн</label>
+          <label><input type="checkbox" data-schedule-day="Вторник" checked /> Вт</label>
+          <label><input type="checkbox" data-schedule-day="Среда" checked /> Ср</label>
+          <label><input type="checkbox" data-schedule-day="Четверг" checked /> Чт</label>
+          <label><input type="checkbox" data-schedule-day="Пятница" checked /> Пт</label>
+          <label><input type="checkbox" data-schedule-day="Суббота" checked /> Сб</label>
+        </div>
+
+        <div class="scheduleFilterActions">
+          <button id="applyScheduleFilterToTree" type="button">Показать эти курсы на дереве</button>
+        </div>
+      </div>
+
+      <div id="scheduleConflicts" class="scheduleConflicts"></div>
+      <div id="scheduleGrid" class="scheduleGridWrap"></div>
+    </div>
+  </div>
+
+  <!-- <div id="taskModal" class="taskModal hidden">
+    <div class="taskModalBackdrop"></div>
+    <div class="taskModalCard">
+      <div class="taskModalHeader">
+        <h3>Тестовое задание</h3>
+        <button id="closeTaskModal" class="taskModalCloseBtn" type="button">Закрыть</button>
+      </div>
+
+      <div id="taskModalBody" class="taskModalBody"></div>
+    </div>
+  </div> -->
+
+  <!-- <div id="finishModal" class="taskModal hidden">
+    <div class="taskModalBackdrop"></div>
+    <div class="taskModalCard">
+      <div class="taskModalHeader">
+        <h3 id="finishModalTitle">Результат</h3>
+        <button id="closeFinishModal" class="taskModalCloseBtn" type="button">Закрыть</button>
+      </div>
+
+      <div id="finishModalBody" class="taskModalBody"></div>
+    </div>
+  </div> -->
+
+  <div id="tutorialLayer" class="tutorialLayer hidden" aria-hidden="true">
+    <div id="tutorialSpotlight" class="tutorialSpotlight"></div>
+
+    <div id="tutorialPopup" class="tutorialPopup" role="dialog" aria-modal="true" aria-labelledby="tutorialTitle">
+      <div class="tutorialStepCounter" id="tutorialStepCounter"></div>
+
+      <h3 id="tutorialTitle" class="tutorialTitle"></h3>
+      <div id="tutorialText" class="tutorialText"></div>
+
+      <div class="tutorialActions">
+        <button id="tutorialSkipBtn" class="tutorialSkipBtn" type="button">
+          Пропустить обучение
+        </button>
+
+        <div class="tutorialNavActions">
+          <button id="tutorialPrevBtn" type="button">Назад</button>
+          <button id="tutorialNextBtn" class="tutorialNextBtn" type="button">Далее</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="profilesModal" class="profilesModal hidden" aria-hidden="true">
+    <div class="profilesModalBackdrop"></div>
+
+    <div class="profilesModalCard" role="dialog" aria-modal="true" aria-labelledby="profilesModalTitle">
+      <div class="profilesModalHeader">
+        <div>
+          <h3 id="profilesModalTitle">Профили выбора курсов</h3>
+          <p>Выбери готовую траекторию, чтобы временно оставить на дереве только курсы этого профиля.</p>
+        </div>
+
+        <button id="closeProfilesModal" class="profilesModalCloseBtn" type="button">×</button>
+      </div>
+
+      <div id="profilesModalBody" class="profilesModalBody"></div>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+
+</html>

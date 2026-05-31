@@ -1,0 +1,12 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    environment:
+      # If you later put the app behind a reverse proxy (nginx/caddy),
+      # uvicorn will respect these headers.
+      - FORWARDED_ALLOW_IPS=*
